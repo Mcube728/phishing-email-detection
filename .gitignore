@@ -126,6 +126,7 @@ celerybeat.pid
 .venv
 env/
 venv/
+email-sentinel/
 ENV/
 env.bak/
 venv.bak/
