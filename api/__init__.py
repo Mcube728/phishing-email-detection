@@ -12,7 +12,7 @@ from feature import FeatureExtraction
 
 #gbc = joblib.load('model/phishing_url_model.joblib')
 
-file = open("gbc_model.sav","rb")
+file = open("model/gbc_model.sav","rb")
 gbc = pickle.load(file)
 file.close()
 
