@@ -19,7 +19,7 @@ def predict():
     if 'urls' not in data:
         return jsonify({'error': 'No URLs provided!'}), 400
     urls = data['urls']
-    response = {}
+    response = { 'urls':[] }
     for url in urls:
         obj = FeatureExtraction(url)
         x = np.array(obj.getFeaturesList()).reshape(1,30)
@@ -29,7 +29,7 @@ def predict():
             'prediction': int(y_pred),
             'message': 'Safe' if y_pred == 1 else 'Unsafe'
         }
-        response[url] = url_result
+        response['urls'].append(url_result)
     return jsonify(response), 200
     
 

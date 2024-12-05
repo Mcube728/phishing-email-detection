@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Run the unit tests using unittest
+python -m unittest discover -s tests -p "test_api.py"
+
+# Check the exit code of unittest (0 means all tests passed)
+if [ $? -ne 0 ]; then
+    echo "Unit tests failed. Commit aborted."
+    exit 1
+fi
+
+# If tests pass, proceed with the commit
+exit 0
