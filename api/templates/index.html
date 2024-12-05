@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Safety Prediction</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input[type="text"] { width: 300px; }
+        button { margin-top: 10px; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>URL Safety Prediction</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL" />
+    <button id="submitBtn">Check URL</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#submitBtn').click(function() {
+                const url = $('#urlInput').val();
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ urls: [url] }),
+                    success: function(response) {
+                        let message = `<strong>Results:</strong><br>`;
+                        response.urls.forEach(item => {
+                            message += `URL: ${item.url} - Prediction: ${item.message}<br>`;
+                        });
+                        $('#result').html(message);
+                    },
+                    error: function(xhr) {
+                        $('#result').html(`<strong>Error:</strong> ${xhr.responseJSON.error}`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

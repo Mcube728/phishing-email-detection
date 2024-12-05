@@ -13,6 +13,10 @@ with open('model/gbc_model.sav', 'rb') as model_file:
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return render_template("index.html")
+
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
